@@ -16,17 +16,20 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@tag
-Feature: Verify signup
+@tags
+Feature: User able to enter valid credential and login successfully
 
-  @Signup
-  Scenario: Verify whether user able to sign up successfully
-    Given User in MakeMyTrip homepage
-    When User click Login button
-    And click create new user link
-    And User able to enter new email id
-    And User able to new password
-    And User enters confirm password
-    And click i agree option.
-    And click create account
-    Then Verify user is signed in successfully
+  @Login
+  Scenario: Entering valid username and password and login
+    Given User is in homepage
+    When User able to click Login button
+    And User enter valid username and valid password
+    And Click Login button
+    Then verify user Logged in successfully
+
+  @Logout
+  Scenario: User able to log out successfully
+    Given User is already logged in
+    When user click menu
+    And click Log out button
+    Then user should logged out successfully
