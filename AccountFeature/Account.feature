@@ -30,3 +30,13 @@ Feature: Verify signup
     And click i agree option.
     And click create account
     Then Verify user is signed in successfully
+
+  @SignupError
+  Scenario: Verify whether error message is displayed while invalid sign up
+    Given User should in make my trip home page
+    When User click login menu button
+    And click create new user account
+    And User enters invalid email id
+    And User enters new password
+    And User enters different password confirm password
+    Then Error message should be displayed for password and confirm password doesn't match.

@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="BookFlight")
+@CucumberOptions(features="BookFlight",glue={"flightBookingStepDefinition"})
 
 public class FlightTestRunner {
 

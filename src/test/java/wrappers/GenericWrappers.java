@@ -97,7 +97,6 @@ public class GenericWrappers implements Wrappers {
 				if(browser.equalsIgnoreCase("chrome")){
 					System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
 					driver = new ChromeDriver();
-					driver.manage().deleteAllCookies();
 				}
 				else{
 					System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver.exe");

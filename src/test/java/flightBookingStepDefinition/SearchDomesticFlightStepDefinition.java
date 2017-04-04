@@ -11,7 +11,7 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 
 	Logger APPLICATION_LOGS = Logger.getLogger("test");
 	
-	String url="www.makemytrip.com";
+	String url="https://www.makemytrip.com/flights";
 	
 	@Given("^User is in Homepage and Logged in$")
 	public void user_is_in_Homepage_and_Logged_in() throws Throwable {
@@ -90,10 +90,24 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 	public void list_of_Domestic_flights_should_be_displayed_for_the_mentioned_criteria() throws Throwable {
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("flights_submit");
+			Thread.sleep(3000);
 		}else{
 
 			clickById("searchBtn");
+			Thread.sleep(3000);
 		}
-	    
+		
+		try {
+			String actual="No. of Stops";
+			String expected=driver.findElementByXPath("(//strong[@class='filters_subhead pull-left'])[1]").getText();
+			Assert.assertEquals("list of light is displayed", expected, actual);
+			APPLICATION_LOGS.debug("list of flight displayed");
+		} catch (AssertionError error) {		
+			APPLICATION_LOGS.debug("list of flights is not displayed");
+			Assert.fail("list of flights is not displayed");
+		}
+	    finally {
+			driver.quit();
+		}
 	}	
 }

@@ -1,23 +1,6 @@
-#Author: your.email@your.domain.com
-#Keywords Summary :
-#Feature: List of scenarios.
-#Scenario: Business rule through list of steps with arguments.
-#Given: Some precondition step
-#When: Some key actions
-#Then: To observe outcomes or validation
-#And,But: To enumerate more Given,When,Then steps
-#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
-#Examples: Container for s table
-#Background: List of steps run before each of the scenarios
-#""" (Doc Strings)
-#| (Data Tables)
-#@ (Tags/Labels):To group Scenarios
-#<> (placeholder)
-#""
-## (Comments)
-#Sample Feature Definition Template
+#Author: Vignesh.k
 @tags
-Feature: User able to enter valid credential and login successfully
+Feature: Login scenarios
 
   @Login
   Scenario: Entering valid username and password and login
@@ -33,3 +16,21 @@ Feature: User able to enter valid credential and login successfully
     When user click menu
     And click Log out button
     Then user should logged out successfully
+
+  @Invalidpassword
+  Scenario: Verify user unable to login with invalid password
+    Given User should be in makemytrip homepage
+    When User click menu
+    And User enters valid email id
+    And User enters invalid password
+    And User click continue
+    Then Error message should be displayed for invalid password
+
+  @InvalidEmailID
+  Scenario: Verify user unable to login with invalid emailid
+    Given User is in make my trip homepage
+    When User click login menu
+    And User enters invalid email
+    And User enters valid password
+    And User click login
+    Then Error message should be displayed for invalid email id
