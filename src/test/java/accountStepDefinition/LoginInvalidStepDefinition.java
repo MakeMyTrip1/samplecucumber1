@@ -101,6 +101,7 @@ Logger APPLICATION_LOGS = Logger.getLogger("test");
 	public void error_message_should_be_displayed_for_invalid_email_id() throws Throwable {
 		String actual="EMail-ID not registered. Please try a different ID.";
 		verifyTextByXpath("(//span[@id='errormsg_password'])[5]", actual);
+		driver.quit();
 		/*try {
 			String actual="EMail-ID not registered. Please try a different ID.";
 			String expected=driver.findElementByXPath("(//span[@id='errormsg_password'])[5]").getText();

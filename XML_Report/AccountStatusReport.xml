@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="11" time="238.79701">
+<testcase classname="Verify signup" name="Verify whether user able to sign up successfully" time="14.16535">
+<failure message="java.lang.AssertionError: Login unsuccessful&#13;&#10;&#9;at org.junit.Assert.fail(Assert.java:88)&#13;&#10;&#9;at accountStepDefinition.AccountStepDefinition.verify_user_is_signed_in_successfully(AccountStepDefinition.java:85)&#13;&#10;&#9;at ✽.Then Verify user is signed in successfully(Account.feature:32)&#13;&#10;"><![CDATA[Given User in MakeMyTrip homepage...........................................passed
+When User click Login button................................................passed
+And click create new user link..............................................passed
+And User able to enter new email id.........................................passed
+And User able to new password...............................................passed
+And User enters confirm password............................................passed
+And click i agree option....................................................passed
+And click create account....................................................passed
+Then Verify user is signed in successfully..................................failed
+
+StackTrace:
+java.lang.AssertionError: Login unsuccessful
+	at org.junit.Assert.fail(Assert.java:88)
+	at accountStepDefinition.AccountStepDefinition.verify_user_is_signed_in_successfully(AccountStepDefinition.java:85)
+	at ✽.Then Verify user is signed in successfully(Account.feature:32)
+]]></failure>
+</testcase>
+<testcase classname="Verify signup" name="Verify whether error message is displayed while invalid sign up" time="9.756907">
+<system-out><![CDATA[Given User should in make my trip home page.................................passed
+When User click login menu button...........................................passed
+And click create new user account...........................................passed
+And User enters invalid email id............................................passed
+And User enters new password................................................passed
+And User enters different password confirm password.........................passed
+Then Error message should be displayed for password and confirm password doesn't match..passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify signup" name="Verify error message is displayed while entering invalid email id in forgot password section" time="12.067423">
+<system-out><![CDATA[Given User should be in dashboard...........................................passed
+When user click the menu button.............................................passed
+And click forgot password link..............................................passed
+And user enters a unregistered emailID in forgot password section...........passed
+And click submit button.....................................................passed
+Then Error message should be displayed for unregistered email ID............passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify signup" name="Verify user can able to change password using forgot password option" time="31.841015">
+<system-out><![CDATA[Given User is in MakeMyTrip Dashboard page..................................passed
+When user selects the my account menu button................................passed
+And clicks ForgotPassword option in login section...........................passed
+And enter the registered email id in email section..........................passed
+And user click submit.......................................................passed
+And user navigates to yopmail...............................................passed
+And user enters the email id in the email textbox...........................passed
+And user click check for inbox option.......................................passed
+And user click check for new mail button....................................passed
+And user clicks the password change request link in the inbox...............passed
+And user navigate back to MakeMytrip support page...........................passed
+And user enter new password in choose a password textbox....................passed
+And user enters confirm password in retype password textbox.................passed
+Then user click submit button for changing the password.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Verify signup" name="Verify user can able to change password using forgot password option and able to login with new password" time="61.800142">
+<system-out><![CDATA[Given User should be in MakeMyTrip dashboard................................passed
+When user clicks my account menu............................................passed
+And user click forgot link in my account menu...............................passed
+And user enters registered mail in forgot password section..................passed
+And click submit button in forgot password section..........................passed
+And user navigate to yopmail dashboard......................................passed
+And user enters email in the textbox........................................passed
+And user select check for inbox button......................................passed
+And user click new mail button..............................................passed
+And user click the link in the message......................................passed
+And user will be navigating to MakeMyTrip support page......................passed
+And user enters new password in the password textbox........................passed
+And user enters retype password in next textbox.............................passed
+And user click submit option to change the password.........................passed
+And Enter EmailAddress in the textbox.......................................passed
+And Enter the changed password in the textbox...............................passed
+And click login button for the new password.................................passed
+Then verify user logged in successfully using new password..................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login scenarios" name="Entering valid username and password and login" time="11.191808">
+<system-out><![CDATA[Given User is in homepage...................................................passed
+When User able to click Login button........................................passed
+And User enter valid username and valid password............................passed
+And Click Login button......................................................passed
+Then verify user Logged in successfully.....................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login scenarios" name="User able to log out successfully" time="12.210939">
+<system-out><![CDATA[Given User is already logged in.............................................passed
+When user click menu........................................................passed
+And click Log out button....................................................passed
+Then user should logged out successfully....................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login scenarios" name="Verify user unable to login with invalid password" time="13.844838">
+<system-out><![CDATA[Given User should be in makemytrip homepage.................................passed
+When User click menu........................................................passed
+And User enters valid email id..............................................passed
+And User enters invalid password............................................passed
+And User click continue.....................................................passed
+Then Error message should be displayed for invalid password.................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login scenarios" name="Verify user unable to login with invalid emailid" time="13.752462">
+<system-out><![CDATA[Given User is in make my trip homepage......................................passed
+When User click login menu..................................................passed
+And User enters invalid email...............................................passed
+And User enters valid password..............................................passed
+And User click login........................................................passed
+Then Error message should be displayed for invalid email id.................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login scenarios" name="Verify user able to change the password using my profile" time="28.681067">
+<system-out><![CDATA[Given user should be in MakeMyTrip dashboard................................passed
+And user should be already logged in........................................passed
+When user selects MyProfile link from menu..................................passed
+And user selects My setting option..........................................passed
+And user enters old password................................................passed
+And user enters new password................................................passed
+And user enters reconfirmed password........................................passed
+And user click password submit button.......................................passed
+Then Password message message should be displayed...........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login scenarios" name="Verify Error message is displayed while entering the current password in change password section" time="29.485059">
+<system-out><![CDATA[Given user should be in dashboard page......................................passed
+And user should logged into the makemytrip website..........................passed
+When user selects My profile option.........................................passed
+And user clicks the settings option in profile section......................passed
+And user enters incorrect current password..................................passed
+And user enters new password in the new password textbox....................passed
+And user enters reconfirm password in reconfirm textbox.....................passed
+And user click submit.......................................................passed
+Then error message should be displayed for incoorect current password.......passed
+]]></system-out>
+</testcase>
+</testsuite>

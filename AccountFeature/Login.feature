@@ -34,3 +34,27 @@ Feature: Login scenarios
     And User enters valid password
     And User click login
     Then Error message should be displayed for invalid email id
+    
+    @ChangePassword
+    Scenario: Verify user able to change the password using my profile 
+    Given user should be in MakeMyTrip dashboard
+    And user should be already logged in.
+    When user selects MyProfile link from menu.
+    And user selects My setting option
+    And user enters old password 
+    And user enters new password
+    And user enters reconfirmed password
+    And user click password submit button
+    Then Password message message should be displayed 
+    
+    @InvalidCurrentPassword
+    Scenario: Verify Error message is displayed while entering the current password in change password section
+    Given user should be in dashboard page
+    And user should logged into the makemytrip website
+    When user selects My profile option.
+    And user clicks the settings option in profile section.
+    And user enters incorrect current password
+    And user enters new password in the new password textbox
+    And user enters reconfirm password in reconfirm textbox
+    And user click submit
+    Then error message should be displayed for incoorect current password
