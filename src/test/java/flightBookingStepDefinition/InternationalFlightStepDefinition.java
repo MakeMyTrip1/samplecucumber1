@@ -7,15 +7,14 @@ import org.openqa.selenium.Keys;
 import cucumber.api.java.en.*;
 import wrappers.GenericWrappers;
 
-public class SearchDomesticFlightStepDefinition extends GenericWrappers {
+public class InternationalFlightStepDefinition extends GenericWrappers {
 
 	Logger APPLICATION_LOGS = Logger.getLogger("test");
 
 	String url="https://www.makemytrip.com/flights";
 
-	@Given("^User is in Homepage and Logged in$")
-	public void user_is_in_Homepage_and_Logged_in() throws Throwable {
-
+	@Given("^User should be in homepage\\.$")
+	public void user_should_be_in_homepage() throws Throwable {
 		invokeApp("chrome", url, false);	
 
 		if(!verifyTitle("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
@@ -25,54 +24,50 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 				}
 			}
 		}		 
-
 	}
 
-	@When("^user selects one way trip$")
-	public void user_selects_one_way_trip() throws Throwable {
-
+	@Given("^selects one way trip$")
+	public void selects_one_way_trip() throws Throwable {
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("one_way_button1");
 		}else
 		{
 			clickByXpath("//div[@id='js-switch__option']/div[1]");
 		}
-
+		APPLICATION_LOGS.debug("one way trip is selected");
 	}
 
-	@When("^user enter Departure city and Destination city$")
-	public void user_enter_Departure_city_and_Destination_city() throws Throwable {
+	@When("^user enters departure city and destination city$")
+	public void user_enters_departure_city_and_destination_city() throws Throwable {
 
 		// Entering the departure city
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
-			enterByXpath("//input[@id='from_typeahead1']", "chennai");
+			enterByXpath("//input[@id='from_typeahead1']", "Chennai");
 			//driver.findElementByXPath("//input[@id='from_typeahead1']").sendKeys(Keys.TAB);
-			Thread.sleep(2000);
 		}
 		else
 		{
-			enterById("hp-widget__sfrom", "chennai");
+			enterById("hp-widget__sfrom", "Chennai");
+			//driver.findElementById("hp-widget__sfrom").sendKeys(Keys.TAB);
 			Thread.sleep(2000);
 		}
 
 		//entering destination city
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
-			enterByXpath("//input[@id='to_typeahead1']", "delhi");
+			enterByXpath("//input[@id='to_typeahead1']", "Bangkok, Thailand (BKK)");
 			//driver.findElementByXPath("//input[@id='to_typeahead1']").sendKeys(Keys.TAB);
-			Thread.sleep(2000);
 		}
 		else
 		{
-			enterById("hp-widget__sTo", "delhi");
-			//driver.findElementById("hp-widget__sTo").sendKeys(Keys.TAB);
+			enterById("hp-widget__sTo", "Bangkok, Thailand (BKK)");
 			Thread.sleep(2000);
+			//driver.findElementById("hp-widget__sTo").sendKeys(Keys.TAB);
 		}
-
+		APPLICATION_LOGS.debug("departure and destination city has been entered");		
 	}
 
-	@When("^user enter Departure date and click search flight$")
-	public void user_enter_Departure_date_and_click_search_flight() throws Throwable {
-		//entering Departure date
+	@When("^user enters departure date$")
+	public void user_enters_departure_date() throws Throwable {
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("start_date_sec");
 			clickByXpath("//span[@class='ui-icon ui-icon-circle-triangle-e']");
@@ -84,13 +79,11 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 			clickById("hp-widget__depart");
 			clickByLink("27");		
 		}
-
-		//click search flight
-
+		APPLICATION_LOGS.debug("departure date has been entered");
 	}
 
-	@Then("^list of Domestic flights should be displayed for the mentioned criteria\\.$")
-	public void list_of_Domestic_flights_should_be_displayed_for_the_mentioned_criteria() throws Throwable {
+	@When("^click search flight button$")
+	public void click_search_flight_button() throws Throwable {
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("flights_submit");
 			Thread.sleep(3000);
@@ -99,23 +92,24 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 			clickById("searchBtn");
 			Thread.sleep(3000);
 		}
-
-		try {
-			String actual="No. of Stops";
-			String expected=driver.findElementByXPath("(//strong[@class='filters_subhead pull-left'])[1]").getText();
-			Assert.assertEquals("list of light is displayed", expected, actual);
-			APPLICATION_LOGS.debug("list of flight displayed");
-		} catch (AssertionError error) {		
-			APPLICATION_LOGS.debug("list of flights is not displayed");
-			Assert.fail("list of flights is not displayed");
-		}
-		finally {
-			driver.quit();
-		}
+		APPLICATION_LOGS.debug("search flight has been clicked");
 	}
 
-	@Given("^User is in makemytrip homepage$")
-	public void user_is_in_makemytrip_homepage() throws Throwable {
+	@Then("^list of International flights should be displayed for one way$")
+	public void list_of_International_flights_should_be_displayed_for_one_way() throws Throwable {
+		try {
+			verifyTextByXpath("(//p[@class='fli_filter__heading append_bottom9'])[1]", "Stops");
+			APPLICATION_LOGS.debug("list of flights has been displayed");
+		} catch (Exception e) {
+			APPLICATION_LOGS.debug("flight list is not displayed");
+		}
+		finally {
+			driver.quit();	
+		}    
+	}
+
+	@Given("^User should be makemytrip homepage$")
+	public void user_should_be_makemytrip_homepage() throws Throwable {
 		invokeApp("chrome", url, false);	
 
 		if(!verifyTitle("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
@@ -127,8 +121,8 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 		}	    
 	}
 
-	@When("^user selects round trip$")
-	public void user_selects_round_trip() throws Throwable {
+	@Given("^select round trip$")
+	public void select_round_trip() throws Throwable {
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("round_trip_button1");
 		}else
@@ -138,35 +132,36 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 		APPLICATION_LOGS.debug("round trip selected");
 	}
 
-	@When("^user enters Dep city and Dest city$")
-	public void user_enters_Dep_city_and_Dest_city() throws Throwable {
+	@When("^user enters dep city and dest city$")
+	public void user_enters_dep_city_and_dest_city() throws Throwable {
 		// Entering the departure city
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
-			enterByXpath("//input[@id='from_typeahead1']", "chennai");
-			driver.findElementByXPath("//input[@id='from_typeahead1']").sendKeys(Keys.TAB);
+			enterByXpath("//input[@id='from_typeahead1']", "Chennai (MAA)");
+			//driver.findElementByXPath("//input[@id='from_typeahead1']").sendKeys(Keys.TAB);
 		}
 		else
 		{
-			enterById("hp-widget__sfrom", "chennai");
-
+			enterById("hp-widget__sfrom", "Chennai (MAA)");
+			Thread.sleep(2000);
 		}
 
 		//entering destination city
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
-			enterByXpath("//input[@id='to_typeahead1']", "delhi");
-			driver.findElementByXPath("//input[@id='to_typeahead1']").sendKeys(Keys.TAB);
+			enterByXpath("//input[@id='to_typeahead1']", "Bangkok, Thailand (BKK)");
+			//driver.findElementByXPath("//input[@id='to_typeahead1']").sendKeys(Keys.TAB);
+			Thread.sleep(2000);
 		}
 		else
 		{
-			enterById("hp-widget__sTo", "delhi");
-			driver.findElementById("hp-widget__sTo").sendKeys(Keys.TAB);
+			enterById("hp-widget__sTo", "Bangkok, Thailand (BKK)");
+			//driver.findElementById("hp-widget__sTo").sendKeys(Keys.TAB);
+			Thread.sleep(2000);
 		}
 		APPLICATION_LOGS.debug("dep city and dest city has been enterd");
 	}
 
-	@When("^user enter dep date and return date$")
-	public void user_enter_dep_date_and_return_date() throws Throwable {
-
+	@When("^user enters dep date and return date$")
+	public void user_enters_dep_date_and_return_date() throws Throwable {
 		//for entering dep date
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("start_date_sec");
@@ -195,8 +190,8 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 		APPLICATION_LOGS.debug("dep date and return date has been entered");
 	}
 
-	@When("^click search flight link$")
-	public void click_search_flight_link() throws Throwable {
+	@When("^clicks search button$")
+	public void clicks_search_button() throws Throwable {
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
 			clickById("flights_submit");
 			Thread.sleep(3000);
@@ -208,10 +203,10 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 		APPLICATION_LOGS.debug("search has been clicked");
 	}
 
-	@Then("^list of flights is displayed for round trip$")
-	public void list_of_flights_is_displayed_for_round_trip() throws Throwable {
+	@Then("^list of Intertnational flight should be displayed for round trip$")
+	public void list_of_Intertnational_flight_should_be_displayed_for_round_trip() throws Throwable {
 		try {
-			verifyTextByXpath("(//strong[@class='filters_subhead pull-left'])[1]", "No. of Stops");
+			verifyTextByXpath("(//p[@class='fli_filter__heading append_bottom9'])[1]", "Stops");
 			APPLICATION_LOGS.debug("list of flights has been displayed");
 		} catch (Exception e) {
 			APPLICATION_LOGS.debug("flight list is not displayed");
@@ -219,6 +214,5 @@ public class SearchDomesticFlightStepDefinition extends GenericWrappers {
 		finally {
 			driver.quit();	
 		}
-		
 	}
 }

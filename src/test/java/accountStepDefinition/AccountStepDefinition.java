@@ -37,7 +37,7 @@ public class AccountStepDefinition extends GenericWrappers {
 	@When("^User able to enter new email id$")
 	public void user_able_to_enter_new_email_id() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-		enterById("newusername", "bevicky@yopmail.com");
+		enterById("newusername", "bgvicky@yopmail.com");
 		driver.findElementById("newusername").sendKeys(Keys.TAB);
 		APPLICATION_LOGS.debug("new email id");
 	}
