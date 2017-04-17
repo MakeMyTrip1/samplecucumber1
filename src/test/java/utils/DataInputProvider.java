@@ -54,20 +54,7 @@ public class DataInputProvider{
  			e.printStackTrace();
 		}
 
-		return data;
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		return data;		
 	}
 
 
