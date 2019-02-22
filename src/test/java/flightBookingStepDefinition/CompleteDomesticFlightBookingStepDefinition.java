@@ -55,6 +55,7 @@ public class CompleteDomesticFlightBookingStepDefinition extends GenericWrappers
 	public void enters_from_domestic_city_and_to_domestic_city() throws Throwable {
 		// Entering the departure city
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
+			Thread.sleep(2000);
 			enterByXpath("//input[@id='from_typeahead1']", "chennai");
 			//driver.findElementByXPath("//input[@id='from_typeahead1']").sendKeys(Keys.TAB);
 			Thread.sleep(2000);
@@ -168,6 +169,7 @@ public class CompleteDomesticFlightBookingStepDefinition extends GenericWrappers
 	public void user_enters_dep_and_dest_city() throws Throwable {
 		// Entering the departure city
 		if(driver.getTitle().equalsIgnoreCase("Cheap Flight Ticket Booking Online, Lowest Domestic Air Fares @ 800/- off")){
+			Thread.sleep(2000);
 			enterByXpath("//input[@id='from_typeahead1']", "chennai");
 			driver.findElementByXPath("//input[@id='from_typeahead1']").sendKeys(Keys.TAB);
 		}
